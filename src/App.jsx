@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+
+// boutons pour selection les cases à cocher lors du jeu
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
@@ -8,7 +10,11 @@ function Square({ value, onSquareClick }) {
   );
 }
 
+
+
 function Board({ xIsNext, squares, onPlay }) {
+
+  // Afficher X || O lorsque un bouton est cliqué
   function handleClick(i) {
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -22,6 +28,7 @@ function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares);
   }
 
+  // partie sur les résultats
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -31,6 +38,7 @@ function Board({ xIsNext, squares, onPlay }) {
   }
 
   return (
+    // Bontons fonctionels
     <>
       <div className="status">{status}</div>
       <div className="board-row">
@@ -68,6 +76,7 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
+  // Revenir à un temps de la partie
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
@@ -94,6 +103,8 @@ export default function Game() {
   );
 }
 
+
+// Combinaison de tous les résultats possibles pour gagner
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
